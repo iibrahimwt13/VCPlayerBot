@@ -38,7 +38,7 @@ chat_id = None
 async def play(client: Client, message_: Message):
     audio = (message_.reply_to_message.audio or message_.reply_to_message.voice) if message_.reply_to_message else None
     chat_id=message_.chat.id
-    res = await message_.reply_text("✯𝗩𝗖𝗣𝗹𝗮𝘆✯=🔄 Processing...")
+    res = await message_.reply_text("✯𝗖𝗵𝗼𝗰𝗼𝗹𝗮𝘁𝘆𝗤𝘂𝗲𝗲𝗻𝗕𝗼𝘁✯=🔄 Processing...")
 
     if audio:
         if round(audio.duration / 60) > DURATION_LIMIT:
@@ -78,14 +78,14 @@ async def play(client: Client, message_: Message):
 
     if message_.chat.id in tgcalls.pytgcalls.active_calls:
         position = sira.add(message_.chat.id, file_path)
-        await res.edit_text(f"✯𝗩𝗖𝗣𝗹𝗮𝘆✯=#️⃣ Queued at position {position}.")
+        await res.edit_text(f"✯𝗖𝗵𝗼𝗰𝗼𝗹𝗮𝘁𝘆𝗤𝘂𝗲𝗲𝗻𝗕𝗼𝘁✯=#️⃣ Queued at position {position}.")
     else:
-        await res.edit_text("✯𝗩𝗖𝗣𝗹𝗮𝘆✯=▶️ Playing...")
+        await res.edit_text("✯𝗖𝗵𝗼𝗰𝗼𝗹𝗮𝘁𝘆𝗤𝘂𝗲𝗲𝗻𝗕𝗼𝘁✯=▶️ Playing...")
         res.delete
         m = await client.send_photo(
         chat_id=message_.chat.id,
         photo="https://telegra.ph/file/7ffa8d18b9b7f1b51a81e.jpg",
-        caption=f"Playing Your song Via  [✯𝗩𝗖𝗣𝗹𝗮𝘆✯](https://t.me/LaylaSupport).",
+        caption=f"Playing Your song Via  [✯𝗖𝗵𝗼𝗰𝗼𝗹𝗮𝘁𝘆𝗤𝘂𝗲𝗲𝗻𝗕𝗼𝘁✯](https://t.me/sangramghangale).",
          ) 
         tgcalls.pytgcalls.join_group_call(message_.chat.id, file_path)
 
@@ -121,15 +121,15 @@ async def deezer(client: Client, message_: Message):
     if message_.chat.id in tgcalls.pytgcalls.active_calls:
         await res.edit("adding in queue")
         position = sira.add(message_.chat.id, file_path)
-        await res.edit_text(f"✯𝗩𝗖𝗣𝗹𝗮𝘆✯=#️⃣ Queued at position {position}.")
+        await res.edit_text(f"✯𝗖𝗵𝗼𝗰𝗼𝗹𝗮𝘁𝘆𝗤𝘂𝗲𝗲𝗻𝗕𝗼𝘁✯=#️⃣ Queued at position {position}.")
     else:
-        await res.edit_text("✯𝗩𝗖𝗣𝗹𝗮𝘆✯=▶️ Playing.....")
+        await res.edit_text("✯𝗖𝗵𝗼𝗰𝗼𝗹𝗮𝘁𝘆𝗤𝘂𝗲𝗲𝗻𝗕𝗼𝘁✯=▶️ Playing.....")
         tgcalls.pytgcalls.join_group_call(message_.chat.id, file_path)
     await res.delete()
     m = await client.send_photo(
         chat_id=message_.chat.id,
         photo="final.png",
-        caption=f"Playing [{title}]({url}) Via [Deezer](https://t.me/AuraXSupport)."
+        caption=f"Playing [{title}]({url}) Via [Deezer](https://t.me/sangramghangale)."
     ) 
     os.remove("final.png")
 # -----------------------------------------------------Jiosaavn-----------------------------------------------------------------
@@ -165,16 +165,16 @@ async def jiosaavn(client: Client, message_: Message):
     file_path= await convert(wget.download(slink))
     if message_.chat.id in tgcalls.pytgcalls.active_calls:
         position = sira.add(message_.chat.id, file_path)
-        await res.edit_text(f"✯𝗩𝗖𝗣𝗹𝗮𝘆✯=#️⃣ Queued at position {position}.")
+        await res.edit_text(f"✯𝗖𝗵𝗼𝗰𝗼𝗹𝗮𝘁𝘆𝗤𝘂𝗲𝗲𝗻𝗕𝗼𝘁✯=#️⃣ Queued at position {position}.")
     else:
-        await res.edit_text("✯𝗩𝗖𝗣𝗹𝗮𝘆✯=▶️ Playing.....")
+        await res.edit_text("✯𝗖𝗵𝗼𝗰𝗼𝗹𝗮𝘁𝘆𝗤𝘂𝗲𝗲𝗻𝗕𝗼𝘁✯=▶️ Playing.....")
         tgcalls.pytgcalls.join_group_call(message_.chat.id, file_path)
     await res.edit("Generating Thumbnail.")
     await generate_cover_square(requested_by, sname, ssingers, sduration, sthumb)
     await res.delete()
     m = await client.send_photo(
         chat_id=message_.chat.id,
-        caption=f"Playing {sname} Via [Jiosaavn](https://t.me/AuraXSupport)",
+        caption=f"Playing {sname} Via [Jiosaavn](https://t.me/sangramghangale)",
         photo="final.png",
     )
     os.remove("final.png")
@@ -217,16 +217,16 @@ async def ytp(client: Client, message_: Message):
     file_path = await convert(download(link))
     if message_.chat.id in tgcalls.pytgcalls.active_calls:
         position = sira.add(message_.chat.id, file_path)
-        await res.edit_text(f"✯𝗩𝗖𝗣𝗹𝗮𝘆✯=#️⃣ Queued at position {position}.")
+        await res.edit_text(f"✯𝗖𝗵𝗼𝗰𝗼𝗹𝗮𝘁𝘆𝗤𝘂𝗲𝗲𝗻𝗕𝗼𝘁✯=#️⃣ Queued at position {position}.")
     else:
-        await res.edit_text("✯𝗩𝗖𝗣𝗹𝗮𝘆✯=▶️ Playing....")
+        await res.edit_text("✯𝗖𝗵𝗼𝗰𝗼𝗹𝗮𝘁𝘆𝗤𝘂𝗲𝗲𝗻𝗕𝗼𝘁✯=▶️ Playing....")
         tgcalls.pytgcalls.join_group_call(message_.chat.id, file_path)
     await res.edit("Generating Thumbnail.")
     await generate_cover(requested_by, title, views, duration, thumbnail)
     res.delete
     m = await client.send_photo(
         chat_id=message_.chat.id,
-        caption=f"Playing `{query}` Via [YouTube](https://t.me/AuraXSupport)",
+        caption=f"Playing `{query}` Via [YouTube](https://t.me/sangramghangale)",
         photo="final.png",
         reply_markup=InlineKeyboardMarkup(
             [[InlineKeyboardButton("Watch on youtube", url=link)]]
