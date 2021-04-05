@@ -59,10 +59,10 @@ async def skip(client: Client, message: Message):
     chat_id = message.chat.id
 
     sira.task_done(chat_id)
-    await message.reply_text("Processing")
+    await message.reply_text("Işleme Alındı")
     if sira.is_empty(chat_id):
         tgcalls.pytgcalls.leave_group_call(chat_id)
-        await message.reply_text("nothing in queue")
+        await message.reply_text("kuyrukta hiçbir şey yok")
     else:
         tgcalls.pytgcalls.change_stream(
             chat_id, sira.get(chat_id)["file_path"]
