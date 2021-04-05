@@ -27,7 +27,7 @@ Use the buttons below to know more about me.
                 ],
                 [
                     InlineKeyboardButton(
-                        "👥 Group", url="https://t.me/maharashtrafriendcircle"
+                        "👥 Group", url="https://t.me/TeLeTiPsOfficialOnTopicChat"
                     ),
                     InlineKeyboardButton(
                         "💾 Source code", url="https://t.me/chocolatyqueenvcplayer"
@@ -35,7 +35,7 @@ Use the buttons below to know more about me.
                 ],
                 [
                     InlineKeyboardButton(
-                        "Join ChatGroup", url="https://t.me/digestnotes"
+                        "Join ChatGroup", url="https://t.me/TeLeTiPsOfficialchannel"
                     )
                 ]
             ]
