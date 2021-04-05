@@ -38,12 +38,12 @@ chat_id = None
 async def play(client: Client, message_: Message):
     audio = (message_.reply_to_message.audio or message_.reply_to_message.voice) if message_.reply_to_message else None
     chat_id=message_.chat.id
-    res = await message_.reply_text("✯𝗖𝗵𝗼𝗰𝗼𝗹𝗮𝘁𝘆𝗤𝘂𝗲𝗲𝗻𝗕𝗼𝘁✯=🔄 Processing...")
+    res = await message_.reply_text("〰️Wyline〰️=🔄 Işleme Alındı...")
 
     if audio:
         if round(audio.duration / 60) > DURATION_LIMIT:
             raise DurationLimitError(
-                f"Videos longer than {DURATION_LIMIT} minute(s) aren't allowed, the provided video is {audio.duration / 60} minute(s)"
+                f"Daha uzun videolar {DURATION_LIMIT} minute(s) izin verilmezse, sağlanan video {audio.duration / 60} minute(s)"
             )
 
         file_name = audio.file_id + audio.file_name.split(".")[-1]
@@ -69,7 +69,7 @@ async def play(client: Client, message_: Message):
                         break
 
         if offset == None:
-            await res.edit_text("❕ You did not give me anything to play.")
+            await res.edit_text("❕ Bana çalacak bir şey vermedin..")
             return
 
         url = text[offset:offset+length]
@@ -78,14 +78,14 @@ async def play(client: Client, message_: Message):
 
     if message_.chat.id in tgcalls.pytgcalls.active_calls:
         position = sira.add(message_.chat.id, file_path)
-        await res.edit_text(f"✯𝗖𝗵𝗼𝗰𝗼𝗹𝗮𝘁𝘆𝗤𝘂𝗲𝗲𝗻𝗕𝗼𝘁✯=#️⃣ Queued at position {position}.")
+        await res.edit_text(f"〰️Wyline〰️=#️⃣ Konumda sıraya alındı {position}.")
     else:
-        await res.edit_text("✯𝗖𝗵𝗼𝗰𝗼𝗹𝗮𝘁𝘆𝗤𝘂𝗲𝗲𝗻𝗕𝗼𝘁✯=▶️ Playing...")
+        await res.edit_text("〰️Wyline〰️=▶️ Çalınıyor...")
         res.delete
         m = await client.send_photo(
         chat_id=message_.chat.id,
-        photo="https://telegra.ph/file/200b2cebc65cfbe720dd0.png",
-        caption=f"Playing Your song Via  [✯𝗖𝗵𝗼𝗰𝗼𝗹𝗮𝘁𝘆𝗤𝘂𝗲𝗲𝗻𝗕𝗼𝘁✯](https://t.me/TeLeTiPsOfficialOnTopicChat).",
+        photo="https://telegra.ph/Wyline-04-05",
+        caption=f"Çalmak Şarkınız Via  [〰️Wyline〰️](https://t.me/WylineVoiceHelp).",
          ) 
         tgcalls.pytgcalls.join_group_call(message_.chat.id, file_path)
 
@@ -100,7 +100,7 @@ async def deezer(client: Client, message_: Message):
     requested_by = message_.from_user.first_name
     text = message_.text.split(" ", 1)
     queryy = text[1]
-    res = await message_.reply_text(f"Searching🔍 for `{queryy}` on deezer")
+    res = await message_.reply_text(f"Arama🔍 Için `{queryy}` om deezer")
     try:
         arq = ARQ("https://thearq.tech")
         r = await arq.deezer(query=queryy, limit=1)
@@ -111,7 +111,7 @@ async def deezer(client: Client, message_: Message):
         url = r[0]["url"]
     except:
         await res.edit(
-            "Found Literally Nothing, You Should Work On Your English!"
+            "Kelimenin tam anlamıyla hiçbir şey bulamadım, Türkçe üzerinde çalışmalısınız!"
         )
         is_playing = False
         return
@@ -121,18 +121,18 @@ async def deezer(client: Client, message_: Message):
     if message_.chat.id in tgcalls.pytgcalls.active_calls:
         await res.edit("adding in queue")
         position = sira.add(message_.chat.id, file_path)
-        await res.edit_text(f"✯𝗖𝗵𝗼𝗰𝗼𝗹𝗮𝘁𝘆𝗤𝘂𝗲𝗲𝗻𝗕𝗼𝘁✯=#️⃣ Queued at position {position}.")
+        await res.edit_text(f"〰️Wyline〰️=#️⃣ Konumda sıraya alındı {position}.")
     else:
-        await res.edit_text("✯𝗖𝗵𝗼𝗰𝗼𝗹𝗮𝘁𝘆𝗤𝘂𝗲𝗲𝗻𝗕𝗼𝘁✯=▶️ Playing.....")
+        await res.edit_text("〰️Wyline〰️=▶️ Çalınıyor.....")
         tgcalls.pytgcalls.join_group_call(message_.chat.id, file_path)
     await res.delete()
     m = await client.send_photo(
         chat_id=message_.chat.id,
-        photo="final.png",
-        caption=f"Playing [{title}]({url}) Via [Deezer](https://t.me/TeLeTiPsOfficialOnTopicChat)."
+        photo="https://telegra.ph/Wyline-04-05",
+        caption=f"Çalmak [{title}]({url}) Via [Deezer](https://t.me/WylineVoiceHelp)."
     ) 
-    os.remove("final.png")
-# -----------------------------------------------------Jiosaavn-----------------------------------------------------------------
+    os.remove("https://telegra.ph/Wyline-04-05")
+# ---------------------------------------------------Jiosaavn-----------------------------------------------------------------
 @Client.on_message(
     filters.command("saavn")
     & filters.group
@@ -143,7 +143,7 @@ async def jiosaavn(client: Client, message_: Message):
     chat_id=message_.chat.id
     text = message_.text.split(" ", 1)
     query = text[1]
-    res = await message_.reply_text(f"Searching🔍 for `{query}` on jio saavn")
+    res = await message_.reply_text(f"Arama🔍 Için `{query}` on jio saavn")
     try:
         async with aiohttp.ClientSession() as session:
             async with session.get(
@@ -157,7 +157,7 @@ async def jiosaavn(client: Client, message_: Message):
         sduration = int(r[0]["duration"])
     except Exception as e:
         await res.edit(
-            "Found Literally Nothing!, You Should Work On Your English."
+            "Kelimenin tam anlamıyla hiçbir şey bulamadım!, Türkçe üzerinde çalışmalısınız."
         )
         print(str(e))
         is_playing = False
@@ -165,19 +165,19 @@ async def jiosaavn(client: Client, message_: Message):
     file_path= await convert(wget.download(slink))
     if message_.chat.id in tgcalls.pytgcalls.active_calls:
         position = sira.add(message_.chat.id, file_path)
-        await res.edit_text(f"✯𝗖𝗵𝗼𝗰𝗼𝗹𝗮𝘁𝘆𝗤𝘂𝗲𝗲𝗻𝗕𝗼𝘁✯=#️⃣ Queued at position {position}.")
+        await res.edit_text(f"〰️Wyline〰️=#️⃣ Konumda sıraya alındı {position}.")
     else:
-        await res.edit_text("✯𝗖𝗵𝗼𝗰𝗼𝗹𝗮𝘁𝘆𝗤𝘂𝗲𝗲𝗻𝗕𝗼𝘁✯=▶️ Playing.....")
+        await res.edit_text("〰️Wyline〰️=▶️ Çalınıyor.....")
         tgcalls.pytgcalls.join_group_call(message_.chat.id, file_path)
     await res.edit("Generating Thumbnail.")
     await generate_cover_square(requested_by, sname, ssingers, sduration, sthumb)
     await res.delete()
     m = await client.send_photo(
         chat_id=message_.chat.id,
-        caption=f"Playing {sname} Via [Jiosaavn](https://t.me/TeLeTiPsOfficialOnTopicChat)",
-        photo="final.png",
+        caption=f"Çalmak {sname} Via [Jiosaavn](https://t.me/WylineVoiceHelp)",
+        photo="https://telegra.ph/Wyline-04-05",
     )
-    os.remove("final.png")
+    os.remove("https://telegra.ph/Wyline-04-05")
 
 
 def changeImageSize(maxWidth, maxHeight, image):
@@ -199,7 +199,7 @@ async def ytp(client: Client, message_: Message):
     chat_id=message_.chat.id
     text = message_.text.split(" ", 1)
     query = text[1]
-    res = await message_.reply_text(f"Searching🔍 for `{query}` on You Tube")
+    res = await message_.reply_text(f"Arama🔍 for `{query}` on You Tube")
     try:
         results = YoutubeSearch(query, max_results=1).to_dict()
         link = f"https://youtube.com{results[0]['url_suffix']}"
@@ -209,7 +209,7 @@ async def ytp(client: Client, message_: Message):
         views = results[0]["views"]
     except Exception as e:
         await res.edit(
-            "Found Literally Nothing!, You Should Work On Your English."
+            "Kelimenin tam anlamıyla hiçbir şey bulamadım!, Türkçe üzerinde çalışmalısınız."
         )
         is_playing = False
         print(str(e))
@@ -217,23 +217,23 @@ async def ytp(client: Client, message_: Message):
     file_path = await convert(download(link))
     if message_.chat.id in tgcalls.pytgcalls.active_calls:
         position = sira.add(message_.chat.id, file_path)
-        await res.edit_text(f"✯𝗖𝗵𝗼𝗰𝗼𝗹𝗮𝘁𝘆𝗤𝘂𝗲𝗲𝗻𝗕𝗼𝘁✯=#️⃣ Queued at position {position}.")
+        await res.edit_text(f"〰️Wyline〰️=#️⃣ Konumda sıraya alındı {position}.")
     else:
-        await res.edit_text("✯𝗖𝗵𝗼𝗰𝗼𝗹𝗮𝘁𝘆𝗤𝘂𝗲𝗲𝗻𝗕𝗼𝘁✯=▶️ Playing....")
+        await res.edit_text("〰️Wyline〰️=▶️ Çalınıyor....")
         tgcalls.pytgcalls.join_group_call(message_.chat.id, file_path)
     await res.edit("Generating Thumbnail.")
     await generate_cover(requested_by, title, views, duration, thumbnail)
     res.delete
     m = await client.send_photo(
         chat_id=message_.chat.id,
-        caption=f"Playing `{query}` Via [YouTube](https://t.me/TeLeTiPsOfficialOnTopicChat)",
+        caption=f"Çalmak `{query}` Via [YouTube](https://t.me/WylineVoiceHelp)",
         photo="final.png",
         reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("Watch on youtube", url=link)]]
+            [[InlineKeyboardButton("Youtube'da izleyin", url=link)]]
         ),
         parse_mode="markdown",
     )
-    os.remove("final.png")
+    os.remove("https://telegra.ph/Wyline-04-05")
 
 async def generate_cover_square(requested_by, title, artist, duration, thumbnail):
     async with aiohttp.ClientSession() as session:
@@ -267,7 +267,7 @@ async def generate_cover_square(requested_by, title, artist, duration, thumbnail
         (255, 255, 255),
         font=font,
     )
-    img.save("final.png")
+    img.save("https://telegra.ph/Wyline-04-05")
     os.remove("temp.png")
     os.remove("background.png")
 
@@ -302,6 +302,6 @@ async def generate_cover(requested_by, title, views, duration, thumbnail):
         (255, 255, 255),
         font=font,
     )
-    img.save("final.png")
+    img.save("https://telegra.ph/Wyline-04-05")
     os.remove("temp.png")
     os.remove("background.png")
