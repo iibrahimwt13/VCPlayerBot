@@ -241,24 +241,7 @@ async def generate_cover_square(requested_by, title, artist, duration, thumbnail
             if resp.status == 200:
                 f = await aiofiles.open("background.png", mode="wb")
                 await f.write(await resp.read())
-                await f.close()
-    image1 = Image.open("./background.png")
-    image2 = Image.open("Others/AURAX.png")
-    image3 = changeImageSize(1280, 720, image1)
-    image4 = changeImageSize(1280, 720, image2)
-    image5 = image3.convert("RGBA")
-    image6 = image4.convert("RGBA")
-    Image.alpha_composite(image5, image6).save("temp.png")
-    img = Image.open("temp.png")
-    draw = ImageDraw.Draw(img)
-    font = ImageFont.truetype("Others/font.otf", 32)
-    draw.text((190, 550), f"Title: {title}", (255, 255, 255), font=font)
-    draw.text((190, 550), f"Artist: {artist}", (255, 255, 255), font=font)
-    draw.text(
-        (190, 590),
-        f"Duration: {duration} Seconds",
-        (255, 255, 255),
-        font=font,
+                await f.close()   
     )
 
     draw.text(
@@ -282,26 +265,3 @@ async def generate_cover(requested_by, title, views, duration, thumbnail):
                 await f.write(await resp.read())
                 await f.close()
 
-    image1 = Image.open("./background.png")
-    image2 = Image.open("Others/AURAX.png")
-    image3 = changeImageSize(1280, 720, image1)
-    image4 = changeImageSize(1280, 720, image2)
-    image5 = image3.convert("RGBA")
-    image6 = image4.convert("RGBA")
-    Image.alpha_composite(image5, image6).save("temp.png")
-    img = Image.open("temp.png")
-    draw = ImageDraw.Draw(img)
-    font = ImageFont.truetype("Others/font.otf", 32)
-    draw.text((190, 550), f"Title: {title}", (255, 255, 255), font=font)
-    draw.text(
-        (190, 590), f"Duration: {duration}", (255, 255, 255), font=font
-    )
-    draw.text((190, 630), f"Views: {views}", (255, 255, 255), font=font)
-    draw.text((190, 670),
-        f"Played By: {requested_by}",
-        (255, 255, 255),
-        font=font,
-    )
-    img.save("https://telegra.ph/Wyline-04-05")
-    os.remove("temp.png")
-    os.remove("background.png")
