@@ -256,16 +256,6 @@ async def generate_cover_square(requested_by, title, artist, duration, thumbnail
     draw.text(
         (190, 590), f"Duration: {duration}", (255, 255, 255), font=font
     )
-    draw.text((190, 630), f"Views: {views}", (255, 255, 255), font=font)
-    draw.text((190, 670),
-        f"Played By: {requested_by}",
-        (255, 255, 255),
-        font=font,
-    )
-    img.save("final.png")
-    os.remove("temp.png")
-    os.remove("background.png")
-    )
 
     draw.text(
         (190, 670),
