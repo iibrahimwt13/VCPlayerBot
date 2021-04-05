@@ -55,6 +55,10 @@ Copy `example.env` to `.env` and fill it with your credentials.
    ```bash
    python main.py
    ```
+## Note
+
+1. If you want any help you can ask [here](https://t.me/TeLeTiPsOfficialOnTopicChat)
+
 
 ### Docker
 
