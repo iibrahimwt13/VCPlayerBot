@@ -38,7 +38,7 @@ chat_id = None
 async def play(client: Client, message_: Message):
     audio = (message_.reply_to_message.audio or message_.reply_to_message.voice) if message_.reply_to_message else None
     chat_id=message_.chat.id
-    res = await message_.reply_text("〰️Wyline〰️=🔄 Işleme Alındı...")
+    res = await message_.reply_text("Wyline=🔄 Işleme Alındı...")
 
     if audio:
         if round(audio.duration / 60) > DURATION_LIMIT:
@@ -80,12 +80,12 @@ async def play(client: Client, message_: Message):
         position = sira.add(message_.chat.id, file_path)
         await res.edit_text(f"〰️Wyline〰️=#️⃣ Konumda sıraya alındı {position}.")
     else:
-        await res.edit_text("〰️Wyline〰️=▶️ Çalınıyor...")
+        await res.edit_text("Wyline=▶️ Çalınıyor...")
         res.delete
         m = await client.send_photo(
         chat_id=message_.chat.id,
         photo="https://telegra.ph/Wyline-04-05",
-        caption=f"Çalmak Şarkınız Via  [〰️Wyline〰️](https://t.me/WylineVoiceHelp).",
+        caption=f"Çalınıyor [Wyline-İnline](https://t.me/WylineVoiceHelp).",
          ) 
         tgcalls.pytgcalls.join_group_call(message_.chat.id, file_path)
 
@@ -100,7 +100,7 @@ async def deezer(client: Client, message_: Message):
     requested_by = message_.from_user.first_name
     text = message_.text.split(" ", 1)
     queryy = text[1]
-    res = await message_.reply_text(f"Arama🔍 Için `{queryy}` om deezer")
+    res = await message_.reply_text(f"Arama Yapılıyor🔍 `{queryy}` deezer")
     try:
         arq = ARQ("https://thearq.tech")
         r = await arq.deezer(query=queryy, limit=1)
@@ -116,22 +116,22 @@ async def deezer(client: Client, message_: Message):
         is_playing = False
         return
     file_path= await convert(wget.download(url))
-    await res.edit("Generating Thumbnail")
+    await res.edit("Küçük Resim Oluşturuluyor")
     await generate_cover_square(requested_by, title, artist, duration, thumbnail)
     if message_.chat.id in tgcalls.pytgcalls.active_calls:
         await res.edit("adding in queue")
         position = sira.add(message_.chat.id, file_path)
-        await res.edit_text(f"〰️Wyline〰️=#️⃣ Konumda sıraya alındı {position}.")
+        await res.edit_text(f"Wyline=#️⃣ Konumda sıraya alındı {position}.")
     else:
-        await res.edit_text("〰️Wyline〰️=▶️ Çalınıyor.....")
+        await res.edit_text("Wyline=▶️ Çalınıyor...")
         tgcalls.pytgcalls.join_group_call(message_.chat.id, file_path)
     await res.delete()
     m = await client.send_photo(
         chat_id=message_.chat.id,
-        photo="https://telegra.ph/Wyline-04-05",
-        caption=f"Çalmak [{title}]({url}) Via [Deezer](https://t.me/WylineVoiceHelp)."
+        photo="final.png",
+        caption=f"Çalınıyor [{title}]({url}) [Deezer](https://t.me/WylineVoiceHelp)."
     ) 
-    os.remove("https://telegra.ph/Wyline-04-05")
+    os.remove("final.png")
 # ---------------------------------------------------Jiosaavn-----------------------------------------------------------------
 @Client.on_message(
     filters.command("saavn")
@@ -143,7 +143,7 @@ async def jiosaavn(client: Client, message_: Message):
     chat_id=message_.chat.id
     text = message_.text.split(" ", 1)
     query = text[1]
-    res = await message_.reply_text(f"Arama🔍 Için `{query}` on jio saavn")
+    res = await message_.reply_text(f"Arama Yapılıyor🔍 `{query}` jio saavn")
     try:
         async with aiohttp.ClientSession() as session:
             async with session.get(
@@ -165,19 +165,19 @@ async def jiosaavn(client: Client, message_: Message):
     file_path= await convert(wget.download(slink))
     if message_.chat.id in tgcalls.pytgcalls.active_calls:
         position = sira.add(message_.chat.id, file_path)
-        await res.edit_text(f"〰️Wyline〰️=#️⃣ Konumda sıraya alındı {position}.")
+        await res.edit_text(f"Wyline=#️⃣ Konumda sıraya alındı {position}.")
     else:
-        await res.edit_text("〰️Wyline〰️=▶️ Çalınıyor.....")
+        await res.edit_text("Wyline=▶️ Çalınıyor...")
         tgcalls.pytgcalls.join_group_call(message_.chat.id, file_path)
-    await res.edit("Generating Thumbnail.")
+    await res.edit("Küçük Resim Oluşturuluyor.")
     await generate_cover_square(requested_by, sname, ssingers, sduration, sthumb)
     await res.delete()
     m = await client.send_photo(
         chat_id=message_.chat.id,
-        caption=f"Çalmak {sname} Via [Jiosaavn](https://t.me/WylineVoiceHelp)",
-        photo="https://telegra.ph/Wyline-04-05",
+        caption=f"Çalınıyor {sname} [Jiosaavn](https://t.me/WylineVoiceHelp)",
+        photo="final.png",
     )
-    os.remove("https://telegra.ph/Wyline-04-05")
+    os.remove("final.png")
 
 
 def changeImageSize(maxWidth, maxHeight, image):
@@ -199,7 +199,7 @@ async def ytp(client: Client, message_: Message):
     chat_id=message_.chat.id
     text = message_.text.split(" ", 1)
     query = text[1]
-    res = await message_.reply_text(f"Arama🔍 for `{query}` on You Tube")
+    res = await message_.reply_text(f"Arama🔍 Yapılıyor `{query}` You Tube")
     try:
         results = YoutubeSearch(query, max_results=1).to_dict()
         link = f"https://youtube.com{results[0]['url_suffix']}"
@@ -217,23 +217,23 @@ async def ytp(client: Client, message_: Message):
     file_path = await convert(download(link))
     if message_.chat.id in tgcalls.pytgcalls.active_calls:
         position = sira.add(message_.chat.id, file_path)
-        await res.edit_text(f"〰️Wyline〰️=#️⃣ Konumda sıraya alındı {position}.")
+        await res.edit_text(f"Wyline=#️⃣ Konumda sıraya alındı {position}.")
     else:
-        await res.edit_text("〰️Wyline〰️=▶️ Çalınıyor....")
+        await res.edit_text("Wyline=▶️Çalınıyor...")
         tgcalls.pytgcalls.join_group_call(message_.chat.id, file_path)
-    await res.edit("Generating Thumbnail.")
+    await res.edit("Küçük Resim Oluşturuluyor.")
     await generate_cover(requested_by, title, views, duration, thumbnail)
     res.delete
     m = await client.send_photo(
         chat_id=message_.chat.id,
-        caption=f"Çalmak `{query}` Via [YouTube](https://t.me/WylineVoiceHelp)",
+        caption=f"Çalıyor `{query}` [YouTube](https://t.me/WylineVoiceHelp)",
         photo="final.png",
         reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("Youtube'da izleyin", url=link)]]
+            [[InlineKeyboardButton("Youtube'de izleyin", url=link)]]
         ),
         parse_mode="markdown",
     )
-    os.remove("https://telegra.ph/Wyline-04-05")
+    os.remove("final.png")
 
 async def generate_cover_square(requested_by, title, artist, duration, thumbnail):
     async with aiohttp.ClientSession() as session:
@@ -241,7 +241,7 @@ async def generate_cover_square(requested_by, title, artist, duration, thumbnail
             if resp.status == 200:
                 f = await aiofiles.open("background.png", mode="wb")
                 await f.write(await resp.read())
-                await f.close()   
+                await f.close()
     image1 = Image.open("./background.png")
     image2 = Image.open("Others/AURAX.png")
     image3 = changeImageSize(1280, 720, image1)
@@ -253,8 +253,12 @@ async def generate_cover_square(requested_by, title, artist, duration, thumbnail
     draw = ImageDraw.Draw(img)
     font = ImageFont.truetype("Others/font.otf", 32)
     draw.text((190, 550), f"Title: {title}", (255, 255, 255), font=font)
+    draw.text((190, 550), f"Artist: {artist}", (255, 255, 255), font=font)
     draw.text(
-        (190, 590), f"Duration: {duration}", (255, 255, 255), font=font
+        (190, 590),
+        f"Duration: {duration} Seconds",
+        (255, 255, 255),
+        font=font,
     )
 
     draw.text(
@@ -263,12 +267,12 @@ async def generate_cover_square(requested_by, title, artist, duration, thumbnail
         (255, 255, 255),
         font=font,
     )
-    img.save("https://telegra.ph/Wyline-04-05")
+    img.save("final.png")
     os.remove("temp.png")
     os.remove("background.png")
 
 
-# Youtube için kapak oluştur
+# Generate cover for youtube
 
 async def generate_cover(requested_by, title, views, duration, thumbnail):
     async with aiohttp.ClientSession() as session:
